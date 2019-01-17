@@ -1,0 +1,26 @@
+[
+    {
+        "ID": 0,
+        "title": "Nintendo Switch",
+        "price": 46,
+        "stock": 266
+    },
+    {
+        "ID": 1,
+        "title": "Playstation",
+        "price": 500,
+        "stock": 0
+    },
+    {
+        "ID": 2,
+        "title": "Gameboy",
+        "price": 350,
+        "stock": 271
+    },
+    {
+        "ID": 3,
+        "title": "League of legends",
+        "price": 350,
+        "stock": 281
+    }
+]
