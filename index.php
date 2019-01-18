@@ -1,9 +1,9 @@
 <?php
-require("marketplace.php");
+require("Marketplace.php");
 
-require("product.php");
+require("Product.php");
 
-require("cart.php");
+require("Cart.php");
 
 session_start();
 if (!isset($_SESSION['cart'])) {

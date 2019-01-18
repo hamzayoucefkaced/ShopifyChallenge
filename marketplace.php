@@ -57,7 +57,8 @@ class Marketplace {
             function meant to query the inventory and return the results, if arg is 0 items 
             in stock are displayed if arg is not 0 all items, including not in stock are displayed
         
-        @Output: Product Object if ID of an object in the inventory matches with the given parameter, 
+        @Output: 
+		Product Object if ID of an object in the inventory matches with the given parameter, 
 		-1 if there is no match
     */
 	public function query($arg){
@@ -77,7 +78,10 @@ class Marketplace {
             print out its title and inventory count after the purchase, and each purchase will 
             update the json database
         
-        @Output: 1 if purchase succesful, 0 if item does not exist, -1 if item out of stock
+        @Output: 
+		1 if purchase succesful, 
+		0 if item does not exist, 
+		-1 if item out of stock
     */
     public function purchase(int $id) {
 		$result = $this->query($id);
