@@ -23,20 +23,32 @@ class Cart
 	public function setTotal($total){
 		$this->total=$total;
 	}
-
+ 
+    /*
+        @Input: Product object 
+        
+        @Purpose: 
+        Adds a product to the cart, and adds its price to the total
+        
+        @output: void 
+    
+    */
 	public function addtocart($product){
-
-		// add  to cart will add the product name to the array contents, and will add the price to the total
-
 		$this->contents[] = $product;
 		$this->total = $this->total + $product->getPrice();
 	}
 
+    /*
+        @Input: Product object 
+        
+        @Purpose: 
+        Removes all objects from the cart, and sets the total to 0
+        
+        @output: void 
+    
+    */
 	public function clear()
 	{
-
-		// clear will empty the cart
-
 		$this->contents = [];
 		$this->total = 0;
 	}
