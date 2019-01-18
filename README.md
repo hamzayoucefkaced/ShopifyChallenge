@@ -9,7 +9,7 @@ COMMANDS:
 
 http://localhost:8000/shopifyphp?buy=ID
 
-This will add an item with given ID to the cart and print the total amount of the cart. Refer to json database for Product IDs. Usage of invalid IDs will cause the page to tell you that the item does not exist.
+This will add an item with given ID to the cart and print the total amount of the cart. Refer to json database for Product IDs. Usage of invalid IDs will cause the page to tell you that the item does not exist. Usage of non numeric variable will throw a 400 HTTP error.
 
 http://localhost:8000/shopifyphp?query=all
 
