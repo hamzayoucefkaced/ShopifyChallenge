@@ -3,7 +3,7 @@
         "ID": 0,
         "title": "Nintendo Switch",
         "price": 46,
-        "stock": 248
+        "stock": 239
     },
     {
         "ID": 1,
@@ -15,12 +15,12 @@
         "ID": 2,
         "title": "Gameboy",
         "price": 350,
-        "stock": 269
+        "stock": 234
     },
     {
         "ID": 3,
         "title": "League of legends",
         "price": 350,
-        "stock": 279
+        "stock": 228
     }
 ]

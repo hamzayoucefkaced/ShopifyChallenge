@@ -7,10 +7,16 @@ require("cart.php");
 
 session_start();
 if (!isset($_SESSION['cart'])) {
+	//creates new cart if cart does not exist
     $_SESSION['cart'] = new Cart();
 }
 
-$marketplace = new Marketplace();
+if (!isset($_SESSION['marketplace'])) {
+	//creates new marketplace if marketplace does not exist
+    $_SESSION['marketplace'] = new Marketplace();
+}
+
+$marketplace = $_SESSION['marketplace'];
 
 if (isset($_GET['buy'])) {
     $query = $marketplace->query($_GET['buy']);
@@ -18,6 +24,7 @@ if (isset($_GET['buy'])) {
     //EXAMPLE:
     // URL: http://localhost:8000/shopifyphp/index.php?buy=Playstation will result in You have added a playstation to your cart! your total is now: 500
     if ($query != -1) {
+	//query will return -1 if id does not exist in database
         if ($query->getInvCount() != 0) {
             $_SESSION['cart']->addtocart($query);
             echo "You have added a ", $query->getTitle(), " to your cart! Your total now is: ", $_SESSION['cart']->getTotal();
@@ -34,19 +41,21 @@ if (isset($_GET['buy'])) {
 else if (isset($_GET['query'])) {
     
     // if a get request by the key query is made, it will set th value as the parameter of query function, which
-    // if it is 0 it will result in it displaying only products that are in stock, if anything else it will display all products
-    // even the ones out of stock
+    // if key is "all" it will result in it displaying all products
+	// if key is "available" it will result in it displaying only products that are available
+	// if key is anything else it will result in a 400 error
     // EXAMPLE:
-    // http://localhost:8000/shopifyphp/index.php?query=0
+    // http://localhost:8000/shopifyphp/index.php?query=all
     // Playstation has 120 products left
     // Gameboy has 30 products left
-    // http://localhost:8000/shopifyphp/index.php?query=1
+    // http://localhost:8000/shopifyphp/index.php?query=available
     // Nintendo Switch has 0 products left
     // Playstation has 120 products left
     // Gameboy has 30 products left
     if ($_GET['query'] == "all" || $_GET['query'] == "available") {
         for ($x = 0; $marketplace->query($x) != -1; $x++) {
             if ($_GET['query'] == "available" && $marketplace->query($x)->getInvCount() == 0) {
+				//If get parameter is "available", it will skip printing the items that are not in stock
                 continue;
             }
             echo $marketplace->query($x)->getTitle(), " has ", $marketplace->query($x)->getInvCount(), " remaining items. <br/>";
@@ -64,40 +73,48 @@ else if (isset($_GET['complete'])) {
         // EXAMPLE:
         // http://localhost:8000/shopifyphp/index.php?complete=1
         // Your total is: 2000
-        // You have purchased 1 Playstation there remains 117
-        // You have purchased 1 Nintendo Switch there remains 21
-        // You have purchased 1 Nintendo Switch there remains 20
-        // You have purchased 1 Gameboy there remains 26
-        // You have purchased 1 Gameboy there remains 25
+        // You have purchased 1 Playstation 
+        // You have purchased 1 Nintendo
+        // Item out of stock! Cannot purchase!
+        // You have purchased 1 Gameboy 
+        // You have purchased 1 Gameboy 
+		// Your purchase total is: 1500
     if ($_GET['complete'] == 1) {
+		
         $cart          = $_SESSION['cart'];
+		if($cart->getTotal()>0){
+		//if cart is not empty
         $purchasetotal = 0;
         echo "Your total is: ", $cart->getTotal(), "<br/>";
-        foreach ((array)$cart->getContents() as $product) {
+        foreach ((array) $cart->getContents() as $product) {
             $result = $marketplace->purchase($product->getID());
             if ($result == 1) {
 				//Purchase succesful
                 $purchasetotal = $purchasetotal + $product->getPrice();
-                echo "You have purchased 1 ", $product->getTitle(), " there remains ", $product->getInvCount(),"<br/>";
+                echo "You have purchased 1 ", $product->getTitle(),"<br/>";
             } else if ($result == -1) {
 				//Purchase unsuccesful: Item out of stock!
                 echo "Item out of stock! Cannot purchase!<br/>";
             } else {
-				//Purchase unsuccesful: Item with ID does not exist
+				//Purchase unsuccesful: Item with ID inputted does not exist
                 echo "Item does not exist!<br/>";
             }
         }
         echo "Your purchase total is: ", $purchasetotal, "<br/>";
         
         $cart->clear();
+		}
+		else{
+			echo "Your cart is empty!";
+		}
     } else {
         http_response_code(400);
         include('errors/my_400.php');
     }
     
 } else {
-    http_response_code(400);
-    include('errors/my_400.php');
+    http_response_code(404);
+    include('errors/my_404.php');
 }
 
 ?>

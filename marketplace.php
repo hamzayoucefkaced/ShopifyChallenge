@@ -46,7 +46,7 @@ class Marketplace {
 		}
 		}
         
-        $newJsonString = json_encode($this->jsoninventory,JSON_PRETTY_PRINT);
+        $newJsonString = json_encode($this->jsoninventory, JSON_PRETTY_PRINT);
         file_put_contents('inventory.json', $newJsonString);
 	}
 	
@@ -57,7 +57,8 @@ class Marketplace {
             function meant to query the inventory and return the results, if arg is 0 items 
             in stock are displayed if arg is not 0 all items, including not in stock are displayed
         
-        @Output: Product Object if ID of an object in the inventory matches with the given parameter, -1 if there is no match
+        @Output: Product Object if ID of an object in the inventory matches with the given parameter, 
+		-1 if there is no match
     */
 	public function query($arg){
 	foreach($this->inventory as $item){
@@ -80,11 +81,12 @@ class Marketplace {
     */
     public function purchase(int $id) {
 		$result = $this->query($id);
-        if ($result != null) {
+        if ($result != -1) {
 			if($result->getInvCount()==0){
 				return -1;
 			}
 		else{
+
             $result->setInvCount($result->getInvCount()-1);
                         
             $this->update(
