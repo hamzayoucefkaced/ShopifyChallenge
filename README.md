@@ -1,4 +1,5 @@
 This was developed using PHP7.3 and tested on the default PHP7.3 webserver. This works on all browsers, but I recommend using it on Firefox, There are some bugs that occur when using Chrome.
+I used the php -S localhost:8000 to start the server.
 I used a JSON "database" to store the values of the products. 
 
 A session with a cart and a marketplace will automatically be created when the index page is accessed.
