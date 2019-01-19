@@ -79,11 +79,11 @@ else if (isset($_GET['complete'])) {
         // EXAMPLE:
         // http://localhost:8000/shopifyphp/index.php?complete=1
         // Your total is: 2000
-        // You have purchased 1 Playstation 
-        // You have purchased 1 Nintendo
+        // You have purchased 1 Playstation! There remains 200 
+        // You have purchased 1 Nintendo! There remains 47
         // Item out of stock! Cannot purchase!
-        // You have purchased 1 Gameboy 
-        // You have purchased 1 Gameboy 
+        // You have purchased 1 Gameboy! There remains 69
+        // You have purchased 1 Gameboy! There remains 68
 		// Your purchase total is: 1500
     if ($_GET['complete'] == 1) {
 		
@@ -95,9 +95,10 @@ else if (isset($_GET['complete'])) {
         foreach ((array) $cart->getContents() as $product) {
             $result = $marketplace->purchase($product->getID());
             if ($result == 1) {
-				//Purchase succesful
+				//Purchase succesful, print Product item and remaining stock
                 $purchasetotal = $purchasetotal + $product->getPrice();
-                echo "You have purchased 1 ", $product->getTitle(),"<br/>";
+                echo "You have purchased 1 ", $product->getTitle(), "! There remains: ",
+		    $marketplace->query($product->getID())->getInvCount(),"<br/>";
             } else if ($result == -1) {
 				//Purchase unsuccesful: Item out of stock!
                 echo "Item out of stock! Cannot purchase!<br/>";
