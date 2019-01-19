@@ -19,6 +19,8 @@ if (!isset($_SESSION['marketplace'])) {
 $marketplace = $_SESSION['marketplace'];
 
 if (isset($_GET['buy'])) {
+    if(is_numeric($_GET['buy'])){
+    //checks if the value is numeric, if not throw a 400 HTTP error code
     $query = $marketplace->query($_GET['buy']);
     // if a get request by the key buy is made, it will add to the cart in the session depending on the value if it is in stock, if not it will inform you it is not in stock and will not add it
     //EXAMPLE:
@@ -35,7 +37,11 @@ if (isset($_GET['buy'])) {
         echo "No such item!";
     }
     
-    echo "<br />";
+    echo "<br />";}
+    else {    
+    http_response_code(400);
+    include('errors/my_400.php');
+	}
 }
 
 else if (isset($_GET['query'])) {
