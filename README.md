@@ -1,3 +1,31 @@
+CHALLENGE:
+
+Please complete the following challenge, and provide your thought process/work. You can attach your work in a text file, link, etc. on the application page (it is also really great when things are on GitHub). Please ensure it is easy to follow for reviewers - as someone from our team will look at every submission!
+
+Task: Build the barebones of an online marketplace.
+
+To do this, build a server side web api that can be used to fetch products either one at a time or all at once.
+Every product should have a title, price, and inventory_count.
+
+Querying for all products should support passing an argument to only return products with available inventory. 
+
+Products should be able to be "purchased" which should reduce the inventory by 1. Products with no inventory cannot be purchased.
+
+P.s. No need to make a frontend!
+
+Extra credit (100% optional as there are lots of different ways to shine in your application): 
+
+Fit these product purchases into the context of a simple shopping cart. 
+
+That means purchasing a product requires first creating a cart, adding products to the cart, and then "completing" the cart.
+The cart should contain a list of all included products, a total dollar amount (the total value of all products), and product inventory shouldn't reduce until after a cart has been completed.
+
+Extra extra credit (please, only do this if you really want to, honest!):
+
+Bonus points for making your API (at least partly) secure, writing documentation that doesn’t suck, including unit tests, and/or building your API using GraphQL.
+
+MY SOLUTION:
+
 This was developed using PHP7.3 and tested on the default PHP7.3 webserver. This works on all browsers, but I recommend using it on Firefox, There are some bugs that occur when using Chrome.
 I used the php -S localhost:8000 to start the server.
 I used a JSON "database" to store the values of the products. 
