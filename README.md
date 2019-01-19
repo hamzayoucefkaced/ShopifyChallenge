@@ -63,6 +63,9 @@ I deliberately coded the index to only allow one get request at a time, hence th
 
 http://localhost:8000/shopifyphp?query=available&&nothing=nothing will ONLY process the query request.
 
+Note: I have attempted to incorporate GraphQL technology to this project, but because I was using a university computer, I have found 
+it difficult to do so, as I was missing account rights that inhibited me from making necessary changes that will allow the package to run on the system.
+
 
 
 
