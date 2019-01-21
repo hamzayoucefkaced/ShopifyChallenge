@@ -9,7 +9,7 @@ class Marketplace {
         
         @Purpose:
             constructor to read the inventory from the json database and set product 
-            objects thta correspond to the data in the json database
+            objects that correspond to the data in the json database
         
         @Output: N/A    
     */    
@@ -54,8 +54,7 @@ class Marketplace {
         @Input: int (?)
         
         @Purpose:
-            function meant to query the inventory and return the results, if arg is 0 items 
-            in stock are displayed if arg is not 0 all items, including not in stock are displayed
+            function meant to query the inventory and return the object with given ID
         
         @Output: 
 		Product Object if ID of an object in the inventory matches with the given parameter, 
@@ -74,9 +73,7 @@ class Marketplace {
         @Input: int 
         
         @Purpose: 
-            function to purchase an item from the market place, purchasing an item will 
-            print out its title and inventory count after the purchase, and each purchase will 
-            update the json database
+            function to purchase an item from the market place
         
         @Output: 
 		1 if purchase succesful, 
